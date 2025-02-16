@@ -11,7 +11,6 @@ class MainActivity: FlutterActivity() {
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
 
-        // Initialize locationHandler first
         val channel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL)
         locationHandler = LocationHandler(this, channel)
 

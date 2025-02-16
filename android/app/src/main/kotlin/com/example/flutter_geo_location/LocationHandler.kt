@@ -50,7 +50,6 @@ class LocationHandler(private val activity: Activity, private val channel: Metho
         val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
         activity.startActivity(intent)
         
-        // Notify Flutter that location services are disabled
         activity.runOnUiThread {
             channel.invokeMethod("locationServicesDisabled", null)
         }
@@ -82,7 +81,6 @@ class LocationHandler(private val activity: Activity, private val channel: Metho
                     "latitude" to location.latitude,
                     "longitude" to location.longitude
                 )
-                // Add logging
                 println("Location Update - Lat: ${location.latitude}, Long: ${location.longitude}")
                 activity.runOnUiThread {
                     channel.invokeMethod("locationUpdate", locationData)
@@ -114,7 +112,6 @@ class LocationHandler(private val activity: Activity, private val channel: Metho
             )
         }
 
-        // Get last known location immediately
         locationManager?.getLastKnownLocation(LocationManager.GPS_PROVIDER)?.let { location ->
             locationListener?.onLocationChanged(location)
         }

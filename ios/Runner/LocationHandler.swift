@@ -10,20 +10,19 @@ class LocationHandler: NSObject, CLLocationManagerDelegate {
         super.init()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = kCLDistanceFilterNone  // Remove distance filter
+        locationManager.distanceFilter = kCLDistanceFilterNone  
     }
     
     func startLocationUpdates() {
         if !CLLocationManager.locationServicesEnabled() {
             channel.invokeMethod("locationServicesDisabled", nil)
-            // This will automatically prompt the user to enable location services
             locationManager.requestWhenInUseAuthorization()
             return
         }
         
         locationManager.requestWhenInUseAuthorization()
-        locationManager.requestLocation()  // Single immediate update
-        locationManager.startUpdatingLocation()  // Continuous updates
+        locationManager.requestLocation()  
+        locationManager.startUpdatingLocation()  
     }
     
     func stopLocationUpdates() {
